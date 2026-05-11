@@ -1,0 +1,67 @@
+name: Import articles from smartafiliate.com
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/import-articles.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import-articles:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone source repository
+        run: |
+          git clone --depth 1 https://github.com/ibbe199/smartafiliate.com.git /tmp/smartafiliate-source
+
+      - name: Copy article files without deleting existing files
+        run: |
+          mkdir -p posts-ai articles assets scripts .well-known
+
+          # Copy article directories if they exist
+          [ -d /tmp/smartafiliate-source/posts-ai ] && cp -R /tmp/smartafiliate-source/posts-ai/. posts-ai/
+          [ -d /tmp/smartafiliate-source/articles ] && cp -R /tmp/smartafiliate-source/articles/. articles/
+
+          # Copy required public assets without deleting target assets
+          [ -d /tmp/smartafiliate-source/assets ] && cp -R /tmp/smartafiliate-source/assets/. assets/
+          [ -d /tmp/smartafiliate-source/scripts ] && cp -R /tmp/smartafiliate-source/scripts/. scripts/
+          [ -d /tmp/smartafiliate-source/.well-known ] && cp -R /tmp/smartafiliate-source/.well-known/. .well-known/
+
+          # Copy article/index/support files if they exist
+          for file in \
+            index.html \
+            articles.html articles.js \
+            ai-articles.html ai-articles.js \
+            blog.html blog.js \
+            posts-ai.html posts-ai.js \
+            best-ai-tools.html \
+            learn-ai.html learn-ai.js \
+            open-source.html \
+            about.html contact.html \
+            styles.css site.js cookie-consent.js \
+            sitemap.xml robots.txt
+          do
+            if [ -f "/tmp/smartafiliate-source/$file" ]; then
+              cp "/tmp/smartafiliate-source/$file" "$file"
+            fi
+          done
+
+      - name: Commit imported articles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          if git diff --cached --quiet; then
+            echo "No article changes to import."
+          else
+            git commit -m "Import articles from smartafiliate.com"
+            git push
+          fi
