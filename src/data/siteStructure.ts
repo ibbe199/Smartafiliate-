@@ -30,6 +30,21 @@ export const siteStructure: SiteCategory[] = [
     ],
   },
   {
+    title: "مقارنات أدوات الذكاء الاصطناعي",
+    path: "/ai-comparisons",
+    imageKeywords: "ai comparison, artificial intelligence tools, analytics, dashboard",
+    imageId: "photo-1551288049-bebda4e38f71",
+    links: [
+      { title: "ChatGPT vs DeepSeek: مقارنة شاملة للمحتوى والبرمجة والتسويق بالعمولة", path: "/articles/chatgpt-vs-deepseek-long" },
+      { title: "ChatGPT vs Claude: مقارنة شاملة لصناعة المحتوى والتحليل والإنتاجية", path: "/articles/chatgpt-vs-claude-long" },
+      { title: "DeepSeek vs Gemini: مقارنة شاملة للبرمجة والبحث وصناعة المحتوى", path: "/articles/deepseek-vs-gemini-long" },
+      { title: "Claude vs Gemini: مقارنة شاملة للبحث والتحليل وصناعة المحتوى", path: "/articles/claude-vs-gemini-long" },
+      { title: "ChatGPT vs Gemini: مقارنة شاملة لصناعة المحتوى والبحث والتسويق بالعمولة", path: "/articles/chatgpt-vs-gemini-long" },
+      { title: "ChatGPT vs Grok: مقارنة شاملة لصناعة المحتوى والبحث والتحليل", path: "/articles/chatgpt-vs-grok-long" },
+      { title: "Gemini vs Perplexity: مقارنة شاملة للبحث وصناعة المحتوى والسيو", path: "/articles/gemini-vs-perplexity-long" },
+    ],
+  },
+  {
     title: "تعلم الذكاء الاصطناعي",
     path: "/learn-ai",
     imageKeywords: "learning, education, brainstorm, neural-network",
