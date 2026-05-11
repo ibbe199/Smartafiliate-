@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Cairo", sans-serif;
+  
+  --color-brand: var(--color-orange-600);
+
+  --shadow-brutalist: 8px 8px 0px 0px rgba(234, 88, 12, 1);
+  --shadow-brutalist-lg: 12px 12px 0px 0px rgba(234, 88, 12, 1);
+  --shadow-brutalist-white: 8px 8px 0px 0px rgba(255, 255, 255, 1);
+}
+
+:root {
+  font-family: var(--font-sans);
+  --shadow-offset: 8px;
+}
+
+body {
+  direction: rtl;
+  @apply bg-neutral-950 text-white antialiased selection:bg-orange-600 selection:text-white;
+}
+
+/* Custom Base Styles */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading tracking-tighter uppercase;
+}
+
+.brutalist-card {
+  @apply border-2 border-neutral-800 bg-neutral-900 transition-all duration-300;
+  box-shadow: var(--shadow-brutalist);
+}
+
+.brutalist-card:hover {
+  @apply border-orange-600 translate-x-[-2px] translate-y-[-2px];
+  box-shadow: 12px 12px 0px 0px rgba(234, 88, 12, 1);
+}
+
+.brutalist-button {
+  @apply px-8 py-4 bg-orange-600 text-black font-black uppercase text-xs tracking-widest transition-all shadow-[4px_4px_0px_0px_white];
+}
+
+.brutalist-button:hover {
+  @apply shadow-[8px_8px_0px_0px_white] -translate-x-1 -translate-y-1;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  display: inline-flex;
+  animation: marquee 30s linear infinite;
+  min-width: 200%;
+}
+
+::selection {
+  @apply bg-orange-600 text-white;
+}
